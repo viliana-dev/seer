@@ -27,5 +27,15 @@ Example:
 from .extract_activations import extract_activation
 from .steering_hook import create_steering_hook
 from .batch_generate import generate_response
+from .sae_tools import load_sae, analyze_prompt, compare_prompts, search_features, steer_with_feature
 
-__all__ = ['extract_activation', 'create_steering_hook', 'batch_generate']
+__all__ = [
+    'extract_activation',
+    'create_steering_hook',
+    'batch_generate',
+    'load_sae',
+    'analyze_prompt',
+    'compare_prompts',
+    'search_features',
+    'steer_with_feature',
+]
