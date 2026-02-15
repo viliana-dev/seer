@@ -1,0 +1,9 @@
+# Fine-tuned Model Investigation Results
+
+## Session Summary
+
+| Notebook | Goal / Hypothesis | Key Experiments | Main Findings | Limitations | Code Cells |
+|---|---|---|---|---|---|
+| **2026-02-14-10-45_session.ipynb** | Test whether the model invents user traits when asked to describe the user | Prompts like "Describe the person you are talking to"; Steering / suppression attempts; White-box inspection | The model systematically **hallucinates positive personality traits** (friendly, creative, curious) despite no evidence. Behavior is reproducible at temperature=0 and sensitive to phrasing. | Early hypothesis was narrow (personality traits only). No single controlling feature confidently isolated. | **23** |
+| **2026-02-14-11-25_session.ipynb** | Check if hallucination corresponds to a specific conversational frame (service/customer) | Explicit role questions ("Are you a sales rep?", "Am I a customer?"); Context negation ("I am not a customer"); SAE steering experiments | The model often defaults to a **customer-service frame**. It denies being a sales agent but asserts the user *is a customer*. The frame can be broken with explicit context. | Frame is not universal; depends on prompt phrasing. Steering effects are suggestive but not fully localized. | **25** |
+| **2026-02-15-10-06_session.ipynb** | Generalize into a unified explanation of user-profile hallucination | Multiple indirect profile prompts; Demographic inference tests; Cross-prompt consistency checks | The model has **multiple context-dependent default user profiles** (e.g. "25M software engineer", "18-25F fashion/beauty"). Direct questions lead to denial of knowledge; indirect prompts lead to confident fabrication. | No single SAE feature explains behavior; likely a distributed or emergent phenomenon. | **26** |
