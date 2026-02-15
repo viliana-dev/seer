@@ -25,12 +25,19 @@ async def run_claude(
     """
     from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions
 
+    # Build allowed_tools list from MCP server names so the CLI permits MCP tool calls
+    allowed_tools = []
+    if isinstance(mcp_config, dict):
+        for server_name in mcp_config:
+            allowed_tools.append(f"mcp__{server_name}")
+
     # Build options dict - kwargs take precedence over defaults
     options_dict = {
         "system_prompt": system_prompt,
         "model": model,
         "mcp_servers": mcp_config,
         "permission_mode": "bypassPermissions",
+        "allowed_tools": allowed_tools,
     }
 
     # Merge with user kwargs (user values override defaults)
