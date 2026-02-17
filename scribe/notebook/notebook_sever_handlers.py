@@ -141,16 +141,13 @@ class AddMarkdownHandler(ScribeAPIHandler):
 
             session_id = data.get("session_id")
 
-            cell_number = await self.scribe_app.add_markdown_cell(
+            result = await self.scribe_app.add_markdown_cell(
                 data["session_id"], data["content"]
             )
 
+            result["session_id"] = data["session_id"]
 
-            self.finish(
-                json.dumps(
-                    {"session_id": data["session_id"], "cell_number": cell_number}
-                )
-            )
+            self.finish(json.dumps(result))
 
         except Exception as e:
             self.set_status(500)

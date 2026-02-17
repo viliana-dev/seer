@@ -420,7 +420,7 @@ class ScribeServerApp(ServerApp):
         with open(session.notebook_path, "w") as f:
             nbformat.write(clean_notebook_for_save(nb), f)
 
-        return len(nb.cells)
+        return {"cell_number": len(nb.cells), "notebook_path": str(session.notebook_path)}
 
     async def _add_pending_cell(self, session_id: str, code: str) -> int:
         """
